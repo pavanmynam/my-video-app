@@ -1,0 +1,6 @@
+streamlit
+Pillow
+requests
+imageio
+imageio-ffmpeg
+numpy
