@@ -1,0 +1,9 @@
+streamlit
+requests
+Pillow
+numpy
+imageio
+gTTS
+pydub
+moviepy
+imageio-ffmpeg
