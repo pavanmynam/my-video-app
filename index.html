@@ -1,6 +1,41 @@
-[Main Subject] + [Action] + [Place] + [Style] + [Camera]
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PadhAI Video</title>
+<style>
+body{font-family:sans-serif;text-align:center;padding:20px;max-width:600px;margin:auto}
+.box{background:#f3f4f6;padding:15px;border-radius:10px;text-align:left;word-wrap:break-word;white-space:pre-wrap;font-size:14px;line-height:1.5}
+input{width:90%;padding:12px;border-radius:8px;border:1px solid #ccc}
+button{padding:12px 25px;background:#7c3aed;color:white;border:0;border-radius:8px;margin-top:10px;cursor:pointer}
+</style>
+</head>
+<body>
+<h2>🎬 PadhAI Video Generator</h2>
 
-Example:
-Bad prompt: "boy running" -> blurry cartoon vastadi ❌
+<div class="box">
+<b>Formula:</b> [Subject] + [Action] + [Place] + [Style] + [Camera]
 
-Best prompt: "a realistic 10-year-old Telugu boy named Balaji, wearing blue school uniform, running fast in a dusty school playground, sweat on face, motion blur, ultra realistic skin texture, 8k, cinematic, bright sunlight, side tracking shot" -> 95% match ✅
+<b>❌ Bad:</b> "boy running" → blurry cartoon
+
+<b>✅ Best:</b> "a realistic 10-year-old Telugu boy named Balaji, wearing blue school uniform, running fast in a dusty school playground, sweat on face, motion blur, ultra realistic skin, 8k, cinematic, bright sunlight, side tracking shot" → 95% match
+</div>
+
+<br>
+<input id="t" placeholder="Ex: Telugu boy running in playground">
+<br>
+<button onclick="gen()">Generate Video</button>
+<div id="out" style="margin-top:20px"></div>
+
+<script>
+async function gen(){
+let p=document.getElementById('t').value;
+if(!p) return alert("Text ivvu bro!");
+document.getElementById('out').innerHTML="⏳ 10 sec lo video vastadi...";
+let r=await fetch(`/api/generate?prompt=${encodeURIComponent(p)}`);
+let d=await r.json();
+document.getElementById('out').innerHTML=`<img src="${d.video}" style="width:100%;border-radius:12px"><br><br><a href="${d.video}" target="_blank"><button>Download</button></a>`;
+}
+</script>
+</body>
+</html>
